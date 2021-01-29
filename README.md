@@ -17,7 +17,6 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
@@ -78,18 +77,18 @@ Dashboards are configured in the `smashing_dash_pse/dshboards` directory, these 
 
 ### Widgets
 
-Predefined widgets can be found in `smashing_dash_pse/widgets`, custom or downloaded widgets should be configured here.  _For a full comprehensive list and examples, refer to the [Documentation](https://github.com/Smashing/smashing/wiki/Additional-Widgets)_
+Predefined widgets can be found in `smashing_dash_pse/widgets`, custom or downloaded widgets should be configured here.  _For a full comprehensive list and examples, refer to the [Widgets Wiki](https://github.com/Smashing/smashing/wiki/Additional-Widgets)_
 
 
 ## Documentation
 
 It is important to understand and how to manipulate the data passed to the application by understand the Puppet Forge GEM and the Puppet Forge API.
 
-_For further details, please refer to the [Documentation](https://forgeapi.puppet.com)_
+_For further details, please refer to the [Forge API Documentation](https://forgeapi.puppet.com)_
 
-_and for information making API calls refer to the [Documentation](https://github.com/puppetlabs/forge-ruby#puppet-forge)_
+_and for information making API calls refer to the [Puppet Forge Gem](https://github.com/puppetlabs/forge-ruby#puppet-forge)_
 
-_for writing and customising dashing configuration see the workshop [Documentation](https://github.com/Smashing/smashing/wiki/Dashing-Workshop)_
+_for writing and customising dashing configuration see the workshop [Smashing Workshops](https://github.com/Smashing/smashing/wiki/Dashing-Workshop)_
 
 <!-- ROADMAP -->
 ## Roadmap
