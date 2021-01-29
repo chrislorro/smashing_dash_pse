@@ -24,12 +24,8 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 This project is about tracking the PSE's Puppet Forge modules, number of downloads, release, and any other relevant information that assists the team in identifying productivity to the wider community.  The data should be presented as a dashboard in a webrowse, and statistic retrieved from https://forge.puppet.com using code written in the Ruby langauage.
 
@@ -55,7 +51,7 @@ The repository has all dependencies and gem included.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/chrislorro/smashing_dash_pse
    ```
 2. Install Ruby packages
    ```sh
@@ -71,7 +67,21 @@ Connect to the dashboard from your webrowser.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-The project is based on writing code in Ruby, 
+### Jobs 
+The project is based on writing code in Ruby, the `smashing_dash_pse/jobs` directory contains the files that are used to pull information from the forge, create objects for manipulating the data, and anything related to the ruby code generating the configuration to passed to the application framework.
+
+
+### Dashboards
+
+Dashboards are configured in the `smashing_dash_pse/dshboards` directory, these are embedded ruby template files.  The layout.erb provides the default dashboard layout in the browser.  Dashboard data is configured in the pse_dash.erb file, the standard data-views in use are **number** and **list** these relatd to the widgets that data is passed into when displayed from the browser. 
+
+
+### Widgets
+
+Predefined widgets can be found in `smashing_dash_pse/widgets`, custom or downloaded widgets should be configured here.  _For a full comprehensive list and examples, refer to the [Documentation](https://github.com/Smashing/smashing/wiki/Additional-Widgets)_
+
+
+## Documentation
 
 It is important to understand and how to manipulate the data passed to the application by understand the Puppet Forge GEM and the Puppet Forge API.
 
@@ -79,12 +89,12 @@ _For further details, please refer to the [Documentation](https://forgeapi.puppe
 
 _and for information making API calls refer to the [Documentation](https://github.com/puppetlabs/forge-ruby#puppet-forge)_
 
+_for writing and customising dashing configuration see the workshop [Documentation](https://github.com/Smashing/smashing/wiki/Dashing-Workshop)_
+
 <!-- ROADMAP -->
 ## Roadmap
 
 See the [open issues](https://trello.com/b/ri9PuQXn/pse-okr-dashboard-forge) for a list of proposed features (and known issues).
-
-
 
 <!-- CONTRIBUTING -->
 ## Contributing
