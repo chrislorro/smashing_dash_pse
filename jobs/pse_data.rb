@@ -13,8 +13,8 @@ def finduser(username)
     send_event("#{usrid}-rels", { current: release })
 end
 
-def findmodule(username)
-    @module_hash = {}
+def find_module(username)
+    module_hash = {}
     usrid = username[0..2]
     totals = 0
     modules = PuppetForge::Module.where(owner: username)
@@ -22,18 +22,19 @@ def findmodule(username)
         name = mods.name
         downloads = mods.downloads
         totals = totals + downloads
-        @module_hash[name] = downloads
+        module_hash[name] = downloads
     end
-    @download_hash = @module_hash.map do | name, value |
+    last_totals = totals
+    download_hash = module_hash.map do | name, value |
         ({label: name, value: value})
     end
-    send_event( "#{usrid}-dld", { items: @download_hash })
-    send_event( "#{usrid}-tot", { current: totals })
+    send_event( "#{usrid}-dld", { items: download_hash })
+    send_event( "#{usrid}-tot", { current: totals, last: last_totals })
 end
 
 forge_a = [ "dylanratcliffe", "jesse" ]
 
-SCHEDULER.every '5s' do
+SCHEDULER.every '1d' do
 
     forge_a.each do | username |
         finduser(username)
