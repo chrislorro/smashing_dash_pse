@@ -1,0 +1,57 @@
+<% content_for :title do %>Puppet Forge PSE Dashboard<% end %>
+<div class="gridster">
+  <ul>
+    <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
+      <div data-id="welcome" data-view="Text" data-title="PSE TEAM" data-text="Puppet Forge Data displayed here" data-moreinfo="Protip: You can drag the widgets around!"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="usermods" data-view="Number" data-title="Total Puppet Modules" data-moreinfo="Supported by Puppet"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="modules" data-view="Number" data-title="Total Modules" data-moreinfo="On the Forge"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="release" data-view="Number" data-title="Total Releases" data-moreinfo="On the Forge"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="2">
+      <div data-id="downloads" data-view="List" data-unordered="false" data-title="Top 10 Downloads" data-moreinfo="# Downloaded since the first day of this year"></div>
+    </li>
+  
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="3">
+      <div data-id="dyl-dld" data-view="List" data-unordered="false" data-title="Dylans Downloads" data-moreinfo="Avaliable on the Forge"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="dyl-rels" data-view="Number" data-title="Dylans Releases" data-moreinfo="To the Forge"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="dyl-mods" data-view="Number" data-title="Dylans Modules" data-moreinfo="On the Forge""></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="dyl-tot" data-view="Number" data-title="Dylans Total Downloads" data-moreinfo="Total Downloads from the Forge"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="3">
+      <div data-id="jes-dld" data-view="List" data-unordered="false" data-title="Jesses Downloads" data-moreinfo="Avaliable on the Forge"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="jes-rels" data-view="Number" data-title="Jesses Releases" data-moreinfo="To the Forge"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="jes-mods" data-view="Number" data-title="Jesses Modules" data-moreinfo="On the Forge"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="jes-tot" data-view="Number" data-title="Jesses Total Downloads" data-moreinfo="Total Downloads from the Forge"></div>
+    </li>
+  </ul>
+  <center><div style="font-size: 12px">Try this: curl -d '{ "auth_token": "YOUR_AUTH_TOKEN", "text": "Hey, Look what I can do!" }' \http://<%=request.host%>:<%=request.port%>/widgets/welcome</div></center>
+</div>
