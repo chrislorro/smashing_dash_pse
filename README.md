@@ -66,19 +66,16 @@ Connect to the dashboard from your webrowser.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-### Jobs 
+### Jobs
 The project is based on writing code in Ruby, the `smashing_dash_pse/jobs` directory contains the files that are used to pull information from the forge, create objects for manipulating the data, and anything related to the ruby code generating the configuration to passed to the application framework.
-
 
 ### Dashboards
 
-Dashboards are configured in the `smashing_dash_pse/dshboards` directory, these are embedded ruby template files.  The layout.erb provides the default dashboard layout in the browser.  Dashboard data is configured in the pse_dash.erb file, the standard data-views in use are **number** and **list** these relatd to the widgets that data is passed into when displayed from the browser. 
-
+Dashboards are configured in the `smashing_dash_pse/dshboards` directory, these are embedded ruby template files.  The layout.erb provides the default dashboard layout in the browser.  Dashboard data is configured in the pse_dash.erb file, the standard data-views in use are **number** and **list** these relatd to the widgets that data is passed into when displayed from the browser.
 
 ### Widgets
 
 Predefined widgets can be found in `smashing_dash_pse/widgets`, custom or downloaded widgets should be configured here.  _For a full comprehensive list and examples, refer to the [Widgets Wiki](https://github.com/Smashing/smashing/wiki/Additional-Widgets)_
-
 
 ## Documentation
 

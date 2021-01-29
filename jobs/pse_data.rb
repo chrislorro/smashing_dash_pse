@@ -3,7 +3,7 @@ require 'pry'
 
 PuppetForge.user_agent = "PseForgeData"
 
-def finduser(username)
+def find_user(username)
     usrid = username[0..2]
     user = PuppetForge::User.find(username)
     modules = user.module_count
@@ -37,8 +37,8 @@ forge_a = [ "dylanratcliffe", "jesse" ]
 SCHEDULER.every '1d' do
 
     forge_a.each do | username |
-        finduser(username)
-        findmodule(username)
+        find_user(username)
+        find_module(username)
     end
 end
 
