@@ -45,9 +45,9 @@ def find_module(username)
     send_event( "#{usrid}-tot", { current: totals, last: last_totals }) # Total downloads can be used to track the number of daily downloads for each user
 end
 
-forge_a = [ "dylanratcliffe", "jesse" ]  # All user names hat have forge modules should be added to this array
+forge_a = [ "dylanratcliffe", "jesse", "benjaminrobertson" ]  # All user names hat have forge modules should be added to this array
 
-SCHEDULER.every '1d' do                 # The application will check for new data on a daily basis
+SCHEDULER.every '2s' do                 # The application will check for new data on a daily basis
 
     forge_a.each do | username |
         find_user(username)             # The username is passed to each method
