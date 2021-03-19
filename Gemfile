@@ -1,11 +1,7 @@
 source 'https://rubygems.org'
 
-# Also having to use a custom fork of smashing sine it's dependencies are too
-# tight to allow for thin 1.8.0. This can be changed back to the gem version
-# once this PR is merged: https://github.com/Smashing/smashing/pull/178
-gem 'smashing',
-  git: 'https://github.com/dylanratcliffe/smashing.git',
-  branch: 'dependencies'
+# Needs to be >= 1.3.2 due to https://github.com/Smashing/smashing/pull/178
+gem 'smashing', ">= 1.3.2"
 
 gem 'puppet_forge'
 
