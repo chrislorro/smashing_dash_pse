@@ -1,5 +1,6 @@
 require 'puppet_forge'
 require 'pry'
+require 'yaml'
 
 PuppetForge.user_agent = "PseForgeData" # parameter is required when making API calls on the forge
 
@@ -45,7 +46,8 @@ def find_module(username)
     send_event( "#{usrid}-tot", { current: totals, last: last_totals }) # Total downloads can be used to track the number of daily downloads for each user
 end
 
-forge_a = [ "dylanratcliffe", "jesse", "benjaminrobertson" ]  # All user names hat have forge modules should be added to this array
+data = YAML.load_file "config.yaml"     # Load the config.yaml file
+forge_a = data["user_list"]             # Find the key user_list and load the user list into the forge_a array
 
 SCHEDULER.every '2s' do                 # The application will check for new data on a daily basis
 
@@ -54,5 +56,3 @@ SCHEDULER.every '2s' do                 # The application will check for new dat
         find_module(username)
     end
 end
-
-
