@@ -5,6 +5,7 @@ PuppetForge.user_agent = "PseForgeData" # parameter is required when making API 
 
 
 def find_user(username)
+    totals  = 0
     usrid   = username
     user    = PuppetForge::User.find(username) # The Puppetforge::User object retrieves all data from the forge API
     count = user.module_count             # The module_count method returns the total number of modules for the user
@@ -12,9 +13,9 @@ def find_user(username)
 
     modules = PuppetForge::Module.where(owner: username) 
 
-    # Add all the numbers together using reduce
-    totals = modules.unpaginated.reduce(0) do | sum, mod |                   
-        sum + mod.downloads
+    modules.unpaginated.each do | mods |                   
+        downloads = mods.downloads          
+        totals = totals + downloads   
     end
 
     return { cols: [ {value: usrid}, {value: totals}, {value: count}, {value: release} ]}
