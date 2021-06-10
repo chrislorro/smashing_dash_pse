@@ -5,29 +5,38 @@ PuppetForge.user_agent = "PseForgeData" # parameter is required when making API 
 
 
 def find_user(username)
-    totals = 0
-    usrid = username
-    user = PuppetForge::User.find(username) # The Puppetforge::User object retrieves all data from the forge API
-    modules = user.module_count             # The module_count method returns the total number of modules for the user
+    totals  = 0
+    usrid   = username
+    user    = PuppetForge::User.find(username) # The Puppetforge::User object retrieves all data from the forge API
+    count = user.module_count             # The module_count method returns the total number of modules for the user
     release = user.release_count            # The release_count returns the total number of releases for a user
-   
-    hrows = [
-        { cols: [ {value: 'Contributor'}, {value: 'Downloads'}, {value: 'User mods'}, {value: 'User release'} ] }
-    ]
 
-    rows = [
-        { cols: [ {value: usrid}, {value: 'undef'}, {value: modules}, {value: release} ]},
-    ]
+    modules = PuppetForge::Module.where(owner: username) 
 
-   send_event('my-table', { hrows: hrows, rows: rows } )
+    modules.unpaginated.each do | mods |                   
+        downloads = mods.downloads          
+        totals = totals + downloads   
+    end
+
+    return { cols: [ {value: usrid}, {value: totals}, {value: count}, {value: release} ]}
+
 end
 
 forge_a = [ "puppetlabs", "dylanratcliffe", "jesse", "benjaminrobertson" ]  # All user names hat have forge modules should be added to this array
 
-SCHEDULER.every '2s' do                 # The application will check for new data on a daily basis
+SCHEDULER.every '10s' do
+
+    hrows = [
+        { cols: [ {value: 'Contributor'}, {value: 'Downloads'}, {value: 'User mods'}, {value: 'User release'} ] }
+    ]
+
+    rows = []
 
     forge_a.each do | username |
-        find_user(username)             # The username is passed to each method
-       # find_module(username)
+        row = find_user(username)             
+        rows << row
     end
+
+    send_event('my-table', { hrows: hrows, rows: rows })
+
 end
