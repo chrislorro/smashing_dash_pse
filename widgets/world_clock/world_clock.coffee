@@ -1,43 +1,27 @@
-class Dashing.WorldClock extends Dashing.Widget
-  # configuration
-  locations: [
-    { zone: "Asia/Singapore", display_location: "SG", primary: true },
-    { zone: "Asia/Jakarta", display_location: "JK" },
-    { zone: "America/Los_Angeles", display_location: "SF" },
-    { zone: "America/New_York", display_location: "NYC" },
-    { zone: "Europe/London", display_location: "EDH" }
-  ]
+class Dashing.Clock extends Dashing.Widget
 
-  startClock: ->
-    for location in @locations
-      date = moment().tz(location.zone)
-      location.time = [date.hours(), date.minutes(), date.seconds()].map (n)->
-        ('0' + n).slice(-2)
-      .join(':')
-      minutes = 60 * date.hours() + date.minutes()
-      totalWidth = document.querySelector('.hours').clientWidth - 1
-      offset = (minutes / (24.0 * 60)) * totalWidth
 
-      clock = document.querySelector("." + location.display_location)
-      if(clock)
-        ['-webkit-transform', '-moz-transform', '-o-transform', '-ms-transform', 'transform'].forEach (vendor) ->
-          clock.style[vendor] = "translateX(" + offset + "px)"
-
-          if(location.primary)
-            @set('time', location.time)
-        , @
-
-    setTimeout @startClock.bind(@), 1000
-
-  setupHours: ->
-    hours = []
-    for h in [0..23]
-      do (h) ->
-        hours[h] = {}
-        hours[h].dark = h< 7 || h>= 19
-        hours[h].name = if h == 12 then h else h%12
-    @set('hours', hours)
 
   ready: ->
-    @setupHours()
-    @startClock()
+    setInterval(@startTime, 500)
+
+  startTime: =>
+    today = new Date()
+
+    @set('date', today.toDateString())
+    @set('time', @formatTime(today.getHours()) + ":" + @formatTime(today.getMinutes()) + ":" + @formatTime(today.getSeconds()))
+
+    offset2 = $(@node).data('second-time-offset')
+    if offset2
+      time2 = new Date()
+      time2.setTime(today.getTime()+offset2*60*60*1000)
+      @set('time2', @formatTime(time2.getHours()) + ":" + @formatTime(time2.getMinutes()) + ":" + @formatTime(time2.getSeconds()))
+
+    offset3 = $(@node).data('third-time-offset')
+    if offset3
+      time3 = new Date()
+      time3.setTime(today.getTime()+offset3*60*60*1000)
+      @set('time3', @formatTime(time3.getHours()) + ":" + @formatTime(time3.getMinutes()) + ":" + @formatTime(time3.getSeconds()))
+
+  formatTime: (i) ->
+    if i < 10 then "0" + i else i

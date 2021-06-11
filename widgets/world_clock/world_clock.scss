@@ -1,72 +1,36 @@
-.widget.widget-world-clock {
-  $dark-text: #333;
-  $dark-background: grey;
-  font-size: 2em;
-  padding-top: 55px;
+// ----------------------------------------------------------------------------
+// Sass declarations
+// ----------------------------------------------------------------------------
+$background-color:  #dc5945;
 
-  > ul li {
-    box-sizing: border-box;
-    display: inline-block;
-    color: $dark-text;
+// ----------------------------------------------------------------------------
+// Widget-clock styles
+// ----------------------------------------------------------------------------
+.widget-clock {
 
-    &.primary {
-      font-size: 2em;
-      margin-top: -185px;
+  background-color: $background-color;
 
-      .location {
-        margin-bottom: -10px;
-      }
-
-      .placeholder {
-        background: white;
-      }
-    }
+  h1 {
+    font-size:+3em;
+    text-shadow:
+     -1px -1px 0 #000,
+     1px -1px 0 #000,
+     -1px 1px 0 #000,
+     1px 1px 0 #000;
   }
 
-  .hours {
-    li {
-      background: white;
-      width: 4.16%;
-
-      &:not(:last-child) {
-        border-right: 1px solid;
-      }
-    }
-
-    .dark {
-      background: $dark-background;
-      color: white;
-    }
+  h2 {
+    font-size:+4em;
+    text-shadow:
+     -1px -1px 0 #000,
+     1px -1px 0 #000,
+     -1px 1px 0 #000,
+     1px 1px 0 #000;
   }
-
-  .locations {
-    text-align: left;
-
-    li {
-      position: absolute;
-    }
-
-    .placeholder {
-      height: 30px;
-      width: 2px;
-      background: $dark-background;
-    }
-
-    .label {
-      position: relative;
-      color: $dark-background;
-
-      .location {
-        margin-left: -50%;
-        &.local {
-          color: white;
-        }
-      }
-
-      .minute {
-        position: absolute;
-        top: 0;
-      }
-    }
+  .second-time {
+    font-size:+3em;
+  }
+  .third-time {
+    font-size:+2em;
   }
 }
