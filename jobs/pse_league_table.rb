@@ -24,6 +24,8 @@ SCHEDULER.every '3600s', first: :now  do
         module_counts << module_count
     end
 
-    send_event('top-contrib', { items: module_counts })
+    modules_by_order = module_counts.sort_by! { |x| -x[:value]}
+
+    send_event('league_table', { items: modules_by_order })
 
 end
