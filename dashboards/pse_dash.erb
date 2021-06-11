@@ -19,9 +19,13 @@
     </li>
 
     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="world_clock" data-view="Clock">
-      <i class="fa fa-clock-o icon-background" style="font-size:10em;"></div>
-    </li></i>
+      <div data-id="team_module_count" data-view="Number" data-title="Total PSE Team Modules" data-moreinfo="From the Puppet Forge"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="clock" data-view="Clock" data-second-time-offset="-2" data-third-time-offset="3"></div>
+      <i class="icon-time icon-background"></i>
+    </li>
 
   </ul>
     <center><div style="font-size: 12px">Try this: curl -d '{ "auth_token": "YOUR_AUTH_TOKEN", "text": "Hey, Look what I can do!" }' \http://<%=request.host%>:<%=request.port%>/widgets/welcome</div></center>

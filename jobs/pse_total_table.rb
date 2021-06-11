@@ -17,7 +17,7 @@ def find_user(username)
         sum + mod.downloads
     end
 
-    return { cols: [ {value: usrid}, {value: totals}, {value: count}, {value: release} ]}
+    return { cols: [ {value: usrid}, {value: totals}, {value: count}, {value: release} ]} # returns a row of user data collected from the forge. Format: Username, Total Downloads, Module Count, Release Count
 
 end
 
@@ -31,14 +31,16 @@ SCHEDULER.every '1s' do
 
     rows = []
     all_totals = []
+    team_modules = []
 
     forge_a.each do | username |
         row = find_user(username)             
         rows << row
         all_totals << row[:cols][1][:value]
+        team_modules << row[:cols][2][:value]
     end
 
     send_event('team-table', { hrows: hrows, rows: rows })
     send_event('all_downloads', { current: all_totals.sum })
+    send_event('team_module_count', { current: team_modules.sum })
 end
-
