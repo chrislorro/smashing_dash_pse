@@ -1,5 +1,6 @@
 require 'puppet_forge'
 require 'pry'
+require 'yaml'
 
 PuppetForge.user_agent = "PseForgeData" # parameter is required when making API calls on the forge
 
@@ -21,11 +22,12 @@ def find_user(username)
 
 end
 
-forge_a = [ "puppetlabs", "dylanratcliffe", "jesse", "benjaminrobertson" ]  # All user names hat have forge modules should be added to this array
+data = YAML.load_file "config.yaml"     # Load the config.yaml file
+forge_a = data["user_list"]             # Find the key user_list and load the user list into the forge_a array
 
 last_total_downloads = 0
 
-SCHEDULER.every '900s', first: :now  do
+SCHEDULER.every '3600s', first: :now  do
 
     hrows = [
         { cols: [ {value: 'Contributor'}, {value: 'Downloads'}, {value: 'User mods'}, {value: 'User release'} ] }
@@ -42,11 +44,11 @@ SCHEDULER.every '900s', first: :now  do
         team_modules << row[:cols][2][:value]
     end
 
-    # binding.pry
+    rows_by_downloads = rows.sort_by! { |x| -x[:cols][1][:value]}
 
+    # binding.pry
     
-    send_event('team-table', { hrows: hrows, rows: rows })
-    send_event('all_downloads', { current: all_totals.sum })
+    send_event('team-table', { hrows: hrows, rows: rows_by_downloads })
     send_event('team_module_count', { current: team_modules.sum })
     send_event('user_downloads', { current:  all_totals.sum, last: last_total_downloads})
     
