@@ -10,4 +10,27 @@ $background-color:  #dc5945;
 
   background-color: $background-color;
 
+  h1 {
+    font-size:+1em;
+    text-shadow:
+     -1px -1px 0 #000,
+     1px -1px 0 #000,
+     -1px 1px 0 #000,
+     1px 1px 0 #000;
+  }
+
+  h2 {
+    font-size:+1em;
+    text-shadow:
+     -1px -1px 0 #000,
+     1px -1px 0 #000,
+     -1px 1px 0 #000,
+     1px 1px 0 #000;
+  }
+  .second-time {
+    font-size:+1em;
+  }
+  .third-time {
+    font-size:+1em;
+  }
 }

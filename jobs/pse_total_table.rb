@@ -17,13 +17,15 @@ def find_user(username)
         sum + mod.downloads
     end
 
-    return { cols: [ {value: usrid}, {value: totals}, {value: count}, {value: release} ]}, totals
+    return { cols: [ {value: usrid}, {value: totals}, {value: count}, {value: release} ]} # returns a row of user data collected from the forge. Format: Username, Total Downloads, Module Count, Release Count
 
 end
 
 forge_a = [ "puppetlabs", "dylanratcliffe", "jesse", "benjaminrobertson" ]  # All user names hat have forge modules should be added to this array
 
-SCHEDULER.every '1s' do
+last_total_downloads = 0
+
+SCHEDULER.every '900s', first: :now  do
 
     hrows = [
         { cols: [ {value: 'Contributor'}, {value: 'Downloads'}, {value: 'User mods'}, {value: 'User release'} ] }
@@ -31,14 +33,23 @@ SCHEDULER.every '1s' do
 
     rows = []
     all_totals = []
+    team_modules = []
 
     forge_a.each do | username |
         row = find_user(username)             
         rows << row
+        all_totals << row[:cols][1][:value]
+        team_modules << row[:cols][2][:value]
     end
 
+    # binding.pry
 
+    
     send_event('team-table', { hrows: hrows, rows: rows })
-    #send_event('all_download', { current: all_totals })
+    send_event('all_downloads', { current: all_totals.sum })
+    send_event('team_module_count', { current: team_modules.sum })
+    send_event('user_downloads', { current:  all_totals.sum, last: last_total_downloads})
+    
+    last_total_downloads = all_totals.sum
 
 end
