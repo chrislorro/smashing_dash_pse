@@ -23,7 +23,9 @@ end
 
 forge_a = [ "puppetlabs", "dylanratcliffe", "jesse", "benjaminrobertson" ]  # All user names hat have forge modules should be added to this array
 
-SCHEDULER.every '1s' do
+last_total_downloads = 0
+
+SCHEDULER.every '900s', first: :now  do
 
     hrows = [
         { cols: [ {value: 'Contributor'}, {value: 'Downloads'}, {value: 'User mods'}, {value: 'User release'} ] }
@@ -40,7 +42,14 @@ SCHEDULER.every '1s' do
         team_modules << row[:cols][2][:value]
     end
 
+    # binding.pry
+
+    
     send_event('team-table', { hrows: hrows, rows: rows })
     send_event('all_downloads', { current: all_totals.sum })
     send_event('team_module_count', { current: team_modules.sum })
+    send_event('user_downloads', { current:  all_totals.sum, last: last_total_downloads})
+    
+    last_total_downloads = all_totals.sum
+
 end
