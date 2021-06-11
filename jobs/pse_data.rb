@@ -27,32 +27,38 @@ and diplayed in rank order, also the total number of downloads are calculated
 and displayed on the dashboard application
 =end
 
-def find_module(username)
+def find_user_modules(username)
     module_hash = {}
-    usrid = username[0..2]      # The first 3 letters of a username is set to pass send_event data to the application
-    totals = 0
     modules = PuppetForge::Module.where(owner: username) # The object will be used to return all user module data
-    modules.unpaginated.map do | mods |     # unpaginated results allow us to work with all module data on a single page
-        name = mods.name                    # The data retrieved from the methods are collected in each parameter
-        downloads = mods.downloads          # each method are related to parameters retrieved from the Forge API 
-        totals = totals + downloads 
-        module_hash[name] = downloads
+    modules.unpaginated.map do | mod |     # unpaginated results allow us to work with all module data on a single page
+        username = mod.owner.username 
+        name = mod.name            # The data retrieved from the methods are collected in each parameter
+        downloads = mod.downloads  # each method are related to parameters retrieved from the Forge API  
+        module_hash[name] = {
+            downloads: downloads,
+            username: username
+        }
     end
-    last_totals = totals
-    download_hash = module_hash.map do | name, value |  # All data is consolidated into a hash value that is passed aas 
-        ({label: name, value: value})                   # an event to the application 
-    end
-    send_event( "#{usrid}-dld", { items: download_hash }) 
-    send_event( "#{usrid}-tot", { current: totals, last: last_totals }) # Total downloads can be used to track the number of daily downloads for each user
+    return module_hash
 end
+
 
 data = YAML.load_file "config.yaml"     # Load the config.yaml file
 forge_a = data["user_list"]             # Find the key user_list and load the user list into the forge_a array
 
-SCHEDULER.every '2s' do                 # The application will check for new data on a daily basis
+#SCHEDULER.every '2s' do                 # The application will check for new data on a daily basis
+
+    #team_module_hash = {}
+    #forge_a.each do | username |
+    #    team_module_hash << find_module(username)
+    #end
+    team_module_hash = {}
 
     forge_a.each do | username |
-        find_user(username)             # The username is passed to each method
-        find_module(username)
+        team_module_hash.merge!(find_user_modules(username))
     end
-end
+    
+    binding.pry
+    puts team_module_hash
+
+#end
