@@ -10,16 +10,6 @@ modules, and number of releases are retrieved and the data passed
 to other paramters in the smashing application.
 =end
 
-def find_user(username)
-    usrid = username[0..2]
-    user = PuppetForge::User.find(username) # The Puppetforge::User object retrieves all data from the forge API
-    modules = user.module_count             # The module_count method returns the total number of modules for the user
-    release = user.release_count            # The release_count returns the total number of releases for a user
-
-    send_event("#{usrid}-mods", { current: modules }) # send_event parameter passes data to pse_dash.erb file
-    send_event("#{usrid}-rels", { current: release }) # and is recieved with the data-id field.
-end
-
 =begin
 The find_module method retrieves data related to each module the user has
 submitted to the forge, the module information is passed to the dashboard
