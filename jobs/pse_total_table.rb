@@ -25,9 +25,10 @@ end
 data = YAML.load_file "config.yaml"     # Load the config.yaml file
 forge_a = data["user_list"]             # Find the key user_list and load the user list into the forge_a array
 
-last_total_downloads = 0
+ yaml_object = YAML.load_file("history.yml")
+ last_total_downloads = YAML.load(yaml_object["user_downloads"])["data"]["last"]
 
-SCHEDULER.every '3600s', first: :now  do
+#SCHEDULER.every '3600s', first: :now  do
 
     hrows = [
         { cols: [ {value: 'Contributor'}, {value: 'Downloads'}, {value: 'User mods'}, {value: 'User release'} ] }
@@ -54,4 +55,4 @@ SCHEDULER.every '3600s', first: :now  do
     
     last_total_downloads = all_totals.sum
 
-end
+#end
