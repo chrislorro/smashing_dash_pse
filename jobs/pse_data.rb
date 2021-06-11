@@ -18,18 +18,20 @@ and displayed on the dashboard application
 =end
 
 def find_user_modules(username)
-    module_hash = {}
+    module_array = []
     modules = PuppetForge::Module.where(owner: username) # The object will be used to return all user module data
     modules.unpaginated.map do | mod |     # unpaginated results allow us to work with all module data on a single page
         username = mod.owner.username 
         name = mod.name            # The data retrieved from the methods are collected in each parameter
         downloads = mod.downloads  # each method are related to parameters retrieved from the Forge API  
-        module_hash[name] = {
+        module_array << {
+            name: name,
             downloads: downloads,
             username: username
         }
     end
-    return module_hash
+    binding.pry
+    return module_array
 end
 
 
@@ -42,13 +44,15 @@ forge_a = data["user_list"]             # Find the key user_list and load the us
     #forge_a.each do | username |
     #    team_module_hash << find_module(username)
     #end
-    team_module_hash = {}
+
+    team_modules = []
 
     forge_a.each do | username |
-        team_module_hash.merge!(find_user_modules(username))
+        team_modules << find_user_modules(username)
     end
-    
+
+    # Flatten multi-dimentional array to be one-dimensional
+    team_modules.flatten!
     binding.pry
-    puts team_module_hash
 
 #end
