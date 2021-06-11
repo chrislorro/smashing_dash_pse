@@ -10,4 +10,5 @@ gem 'puppet_forge'
 group :development do
   gem 'readapt'
   gem 'pry'
+  gem 'rake'
 end

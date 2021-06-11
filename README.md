@@ -63,6 +63,14 @@ The repository has all dependencies and gem included.
 
 Connect to the dashboard from your webrowser.
 
+### Testing
+
+To run local tests, run:
+
+```sh
+bundle exec rake
+```
+
 <!-- USAGE EXAMPLES -->
 ## Usage
 
