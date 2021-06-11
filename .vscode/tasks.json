@@ -10,6 +10,19 @@
 				"kind": "test",
 				"isDefault": true
 			}
-		}
+		},
+		{
+      "label": "Run dashboard",
+      "type": "shell",
+      "command": "bundle exec smashing start",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
 	]
 }
