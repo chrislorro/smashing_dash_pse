@@ -63,6 +63,8 @@ The repository has all dependencies and gem included.
 
 Connect to the dashboard from your webrowser.
 
+In VSCode you can also start the dashboard using Command+Shift+B or running the "Build Task"
+
 ### Testing
 
 To run local tests, run:
@@ -70,6 +72,8 @@ To run local tests, run:
 ```sh
 bundle exec rake
 ```
+
+You can also run test from VSCode using the "Test Task". Type Command+Shift+P then select "Tasks: Run Test Task"
 
 <!-- USAGE EXAMPLES -->
 ## Usage
