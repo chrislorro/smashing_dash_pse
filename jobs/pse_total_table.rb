@@ -1,6 +1,7 @@
 require 'puppet_forge'
 require 'pry'
 require 'yaml'
+require_relative '../lib/config'
 
 PuppetForge.user_agent = "PseForgeData" # parameter is required when making API calls on the forge
 
@@ -22,8 +23,8 @@ def find_user(username)
 
 end
 
-data = YAML.load_file "config.yaml"     # Load the config.yaml file
-forge_a = data["user_list"]             # Find the key user_list and load the user list into the forge_a array
+config = PSEConfig.new
+forge_a = config.forge_usernames
 
  yaml_object = YAML.load_file("history.yml")
  last_total_downloads = YAML.load(yaml_object["user_downloads"])["data"]["last"]

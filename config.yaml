@@ -1,6 +1,15 @@
---- 
-user_list: 
-  - benjaminrobertson
-  - dylanratcliffe
-  - jesse
-  - 16c7x
+---
+users:
+  - display_name: Benjamin Robertson
+    forge_username: benjaminrobertson
+
+  - display_name: Dylan Ratcliffe
+    forge_username: dylanratcliffe
+    gems:
+      - onceover
+
+  - display_name: Jesse Reynolds
+    forge_username: jesse
+
+  - display_name: Andrew Jones
+    forge_username: 16c7x
