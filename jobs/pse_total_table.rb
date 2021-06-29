@@ -1,6 +1,8 @@
 require 'puppet_forge'
 require 'pry'
 require 'yaml'
+require 'gems'
+require_relative '../lib/config'
 
 PuppetForge.user_agent = "PseForgeData" # parameter is required when making API calls on the forge
 
@@ -22,8 +24,8 @@ def find_user(username)
 
 end
 
-data = YAML.load_file "config.yaml"     # Load the config.yaml file
-forge_a = data["user_list"]             # Find the key user_list and load the user list into the forge_a array
+config = PSEConfig.new
+forge_a = config.forge_usernames
 
  yaml_object = YAML.load_file("history.yml")
  last_total_downloads = YAML.load(yaml_object["user_downloads"])["data"]["last"]
@@ -43,6 +45,12 @@ forge_a = data["user_list"]             # Find the key user_list and load the us
         rows << row
         all_totals << row[:cols][1][:value]
         team_modules << row[:cols][2][:value]
+    end
+
+    # Also total all rubygems
+    config.gems.each do |gem|
+        gem_info = Gems.info(gem)
+        all_totals << gem_info["downloads"]
     end
 
     rows_by_downloads = rows.sort_by! { |x| -x[:cols][1][:value]}

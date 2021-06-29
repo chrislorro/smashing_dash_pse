@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'smashing', ">= 1.3.2"
 
 gem 'puppet_forge'
+gem 'gems'
 
 # Development dependencies. These are specified as a group so that they can be
 # excluded from production deployments

@@ -1,6 +1,7 @@
 require 'puppet_forge'
 require 'pry'
 require 'yaml'
+require_relative '../lib/config'
 
 PuppetForge.user_agent = "PseForgeData" # par
 
@@ -12,8 +13,8 @@ def find_data(username)
     return ({label: username, value: count})  
 end
 
-data = YAML.load_file "config.yaml"     # Load the config.yaml file
-forge_a = data["user_list"]             # Find the key user_list and load the user list into the forge_a array
+config = PSEConfig.new
+forge_a = config.forge_usernames
 
 SCHEDULER.every '3600s', first: :now  do
 
