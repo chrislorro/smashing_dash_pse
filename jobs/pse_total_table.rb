@@ -1,6 +1,7 @@
 require 'puppet_forge'
 require 'pry'
 require 'yaml'
+require 'gems'
 require_relative '../lib/config'
 
 PuppetForge.user_agent = "PseForgeData" # parameter is required when making API calls on the forge
@@ -44,6 +45,12 @@ forge_a = config.forge_usernames
         rows << row
         all_totals << row[:cols][1][:value]
         team_modules << row[:cols][2][:value]
+    end
+
+    # Also total all rubygems
+    config.gems.each do |gem|
+        gem_info = Gems.info(gem)
+        all_totals << gem_info["downloads"]
     end
 
     rows_by_downloads = rows.sort_by! { |x| -x[:cols][1][:value]}
